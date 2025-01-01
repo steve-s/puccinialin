@@ -1,10 +1,14 @@
 # puccinialin
 
-Install rust into a temporary directory to support rust-based builds. cargo and rustc are installed into a cache
-directory, to avoid modifying the host's environment, and activated using a set of environment variables.
+Install rust into a temporary directory to support rust-based builds.
 
-The difficult is mapping one of the various sources python platform information (`sys`, `platform`, `sysconfig`, etc.)
-to a rustc target triple (https://doc.rust-lang.org/nightly/rustc/platform-support.html). Currently, this project uses
+Cargo and rustc are installed into a cache directory, to avoid modifying the host's environment, and activated using a
+set of environment variables.
+
+The difficulty is mapping one of the various sources python platform information (`sys`, `platform`, `sysconfig`, etc.)
+to a rustc target triple (https://doc.rust-lang.org/nightly/rustc/platform-support.html). This project mainly uses
+`SOABI` for detection, but can be extended to use other APIs for other platforms. By using rustup, it is currently
+limited to the platforms listed under https://rust-lang.github.io/rustup/installation/other.html#manual-installation.
 `SOABI`, which contains the file extensions of native modules.
 
 ## Contributing
