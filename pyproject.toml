@@ -1,6 +1,6 @@
 [project]
 name = "puccinialin"
-version = "0.1.0"
+version = "0.1.1"
 description = "Install rust into a temporary directory for boostrapping a rust-based build backend"
 readme = "README.md"
 authors = [
@@ -15,6 +15,9 @@ dependencies = [
 
 [project.scripts]
 puccinialize = "puccinialin.__main__:main"
+
+[project.urls]
+repository = "https://github.com/konstin/puccinialin"
 
 [build-system]
 requires = ["hatchling"]
