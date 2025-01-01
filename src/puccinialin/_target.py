@@ -45,8 +45,12 @@ rustup_targets = [
 
 
 def get_triple(file: typing.IO) -> str:
+    """Attempt to infer the rustc (and thereby rustup) target triple from SOABI.
+
+    There are many different variables in Python that all return some platform information. `SOABI` is the tag of the
+    shared library of native modules, which should match the binaries that we build on the rust side. For other
+    platforms, we may need to query additional fields."""
     soabi = sysconfig.get_config_var("SOABI")
-    """Attempt to infer the rustc (and thereby rustup) target triple from SOABI."""
     if soabi:
         print(f"Python reports SOABI: {soabi}", file=file)
         if soabi.count("-") == 1:
@@ -56,7 +60,7 @@ def get_triple(file: typing.IO) -> str:
                 "-", maxsplit=2
             )
     else:
-        # Older windows
+        # Older windows doesn't have SOABI
         platform = sysconfig.get_platform()
         print(f"Python reports platform: {platform}", file=file)
 

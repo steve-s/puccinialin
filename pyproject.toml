@@ -23,6 +23,9 @@ build-backend = "hatchling.build"
 [tool.ruff]
 line-length = 88
 
+[tool.ruff.lint]
+extend-select = ["B", "I"]
+
 [dependency-groups]
 dev = [
     "pyright>=1.1.391",
