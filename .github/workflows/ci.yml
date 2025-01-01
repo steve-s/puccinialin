@@ -1,0 +1,48 @@
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  run:
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          # Linux x86_64
+          - ubuntu-latest
+          # Mac aarch64
+          - macos-latest
+          # Mac x86_64
+          - macos-13
+          # Windows x86_64
+          - windows-latest
+        python_version: [ "3.9", "3.13" ]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@v5
+      - name: Bootstrap Rust
+        run: uv run -p ${{ matrix.python_version }} python -m puccinialin
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Ruff lint
+        uses: astral-sh/ruff-action@v2
+        with:
+          args: "check"
+      - name: Ruff format
+        uses: astral-sh/ruff-action@v2
+        with:
+          args: "format --check"
+      - name: Prettier
+        run: npx prettier --check .github/** src/** *.md
+      - uses: astral-sh/setup-uv@v5
+      - name: Type Check
+        run: uv run pyright

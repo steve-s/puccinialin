@@ -1,0 +1,29 @@
+[project]
+name = "puccinialin"
+version = "0.1.0"
+description = "Install rust into a temporary directory for boostrapping a rust-based build backend"
+readme = "README.md"
+authors = [
+    { name = "konstin", email = "konstin@mailbox.org" }
+]
+requires-python = ">=3.9"
+dependencies = [
+    "httpx>=0.28.1,<0.29",
+    "platformdirs>=4.3.6,<5",
+    "tqdm>=4.67.1,<5",
+]
+
+[project.scripts]
+puccinialize = "puccinialin.__main__:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+line-length = 88
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.391",
+]
