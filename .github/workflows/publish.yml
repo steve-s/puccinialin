@@ -23,5 +23,5 @@ jobs:
         run: |
           uv venv -p 3.9
           uv pip install dist/*.whl
-          puccinialize
+          .venv/bin/puccinialize
       - run: uv publish
