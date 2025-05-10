@@ -31,6 +31,7 @@ rustup_targets = [
     "powerpc-unknown-linux-gnu",
     "powerpc64-unknown-linux-gnu",
     "powerpc64le-unknown-linux-gnu",
+    "powerpc64le-unknown-linux-musl",
     "s390x-unknown-linux-gnu",
     "x86_64-apple-darwin",
     "x86_64-linux-android",
