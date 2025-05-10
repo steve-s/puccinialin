@@ -76,12 +76,16 @@ def get_triple(file: typing.IO) -> str:
             print(f"Unrecognized linux platform {platform}", file=file)
             sys.exit(1)
         target = f"{arch}-unknown-{linux}-{libc}"
-    # macOS Intel
+    # macOS (both Intel and arm)
     elif platform == "darwin":
-        target = "x86_64-apple-darwin"
-    # macOS ARM
-    elif platform == "darwin_arm64":
-        target = "aarch64-apple-darwin"
+        # Check machine architecture to determine the correct target
+        machine = platform.machine()
+        if machine == "arm64":
+            target = "aarch64-apple-darwin"
+        elif machine == "x86_64":
+            target = "x86_64-apple-darwin"
+        else:
+            raise ValueError(f"Unknown macOS machine: {machine}")
     # Windows x86_64
     elif platform in ["win-amd64", "win_amd64"]:
         target = "x86_64-pc-windows-msvc"
